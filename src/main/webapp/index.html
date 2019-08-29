@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <title>Web Challenge</title>
+    
+    <link rel='stylesheet' href='css/navbar.css'>
+    <link rel='stylesheet' href='css/dogs.css'>
+    <link rel='stylesheet' href='css/intro.css'>
+    <link rel='stylesheet' href='css/animation.css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e90eb8fa51.js"></script>
+  </head>
+  <header>
+  	<a href=''><img id='logo' src='EulerityLogoWhiteSmall.png'><h1>Adoptions</h1></a>
+  	<nav>
+  		<ul>
+  			<li><a href='#'>HOME</a></li>
+  			<li><a href='#'>CONTACT</a></li>
+  			<li><a href='#'>SUPPORT</a></li>
+  			<li><a id='login' href='#'>LOGIN</a></li>
+  		</ul>
+  	</nav>
+  
+  
+  </header>
+  <body>
+  
+	  <div class='intro'>
+		  <div class='intro-text'>
+		  	<img src='EulerityLogoBlackSmall.png'>
+		  	<p>The new adoption services app.</p>
+		  	<button id = 'download' onclick='window.location.href = "https://apps.apple.com/us/app/lnrd/id1294841777";'>
+		  		<i class="fab fa-apple"></i>
+		  		<p id='download'>Download</p>
+		  	</button>
+		  </div>
+	  	
+	  	<p id='pets'>See our friends available for adoption right now!</p>
+	  	<a href='#jump'><i class="fas fa-angle-double-down down-arrow"></i></a>
+	  </div>
+	  
+	  
+    <div class='pet-block'>
+	    <script>
+	    	var xhr = new XMLHttpRequest();
+	    	xhr.open('GET', "http://localhost:8080/images", true);
+	    	xhr.send();
+	    	xhr.addEventListener("readystatechange", processRequest, false);
+	    	
+	    	xhr.onreadystatechange = processRequest;
+	    	
+	    	
+	    	function processRequest(e) {
+	    		if (xhr.readyState == 4 && xhr.status == 200) {
+	    			var response = JSON.parse(xhr.responseText);
+	    			
+	    			for (var i = 0; i < response.length; i ++) {
+	    				img = document.createElement('img');
+	    				img.classList.add('dogs');
+	    				if(i == 0) {
+	    					img.id = 'jump';
+	    				}
+	    				
+	    				title = document.createElement('p');
+	    				title.classList.add('dogs');
+	    				title.innerHTML = '<i class="fas fa-paw paw"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + response[i].title;
+	    				
+	    				description = document.createElement('p');
+	    				description.classList.add('dogs');
+	    				description.innerHTML = '<i class="fas fa-pen paw"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + response[i].description;
+	    				
+	    				created = document.createElement('p');
+	    				created.classList.add('dogs');
+	    				created.innerHTML = '<i class="far fa-clock paw"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + response[i].created;
+	    				
+	        			img.src = response[i].url;
+	        			
+	        			download = document.createElement('a');
+	        			download.setAttribute('download', '');
+	        			download.setAttribute('href', response[i].url);
+	        			download.appendChild(img);
+	        			
+	        			var div = document.getElementsByClassName('pet-block')[0];
+	        			
+	        			div.appendChild(document.createElement('br'));
+	        			div.appendChild(download);
+	        			div.appendChild(title);
+	        			div.appendChild(description);
+	        			div.appendChild(created);
+	
+	    			}
+	    		}
+	    	}
+	    
+	    </script>
+    </div>
+    <script src='js/animation.js'></script>
+  </body>
+</html>

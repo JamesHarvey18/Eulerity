@@ -1,0 +1,29 @@
+.dogs{
+	text-align: left;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 30%;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
+	font-size: 22px;
+	transition: 0.3s;
+}
+
+a .dogs:hover{
+	transform: scale(1.03);
+	transition: 0.5s;
+	filter: grayscale(100%);
+}
+
+.paw {
+	background: #039dfc;
+    padding:15px;
+    border-radius: 50%;
+    color: white;
+    font-size: 2em;
+}
+
+.paw:hover{
+	animation: fa-spin 0.6s linear;
+}
